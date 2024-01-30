@@ -3,9 +3,10 @@ from django.conf import settings
 from django.utils.timezone import now, get_current_timezone
 from dateutil import rrule
 from icalendar import Calendar
-import requests
 
 import logging
+from security import safe_requests
+
 logger = logging.getLogger(__name__)
 
 
@@ -57,7 +58,7 @@ def _recurring_component_to_events(component):
 
 def get_calendar_data():
     feed_url = settings.CALENDAR_ICAL_URL
-    resp = requests.get(feed_url)
+    resp = safe_requests.get(feed_url)
     cal = Calendar.from_ical(resp.content)
     return cal
 

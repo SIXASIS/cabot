@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterIndexTogether(
             name='statuscheckresult',
-            index_together=set([('status_check', 'time_complete'), ('status_check', 'id')]),
+            index_together={('status_check', 'time_complete'), ('status_check', 'id')},
         ),
     ]

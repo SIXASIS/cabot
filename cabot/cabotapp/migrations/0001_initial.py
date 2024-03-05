@@ -211,7 +211,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterIndexTogether(
             name='statuscheckresult',
-            index_together=set([('check', 'time_complete'), ('check', 'id')]),
+            index_together={('check', 'time_complete'), ('check', 'id')},
         ),
         migrations.AddField(
             model_name='service',
@@ -245,7 +245,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterUniqueTogether(
             name='alertpluginuserdata',
-            unique_together=set([('title', 'user')]),
+            unique_together={('title', 'user')},
         ),
         migrations.AddField(
             model_name='alertacknowledgement',

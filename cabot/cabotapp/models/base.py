@@ -21,6 +21,7 @@ from ..alert import AlertPluginUserData, send_alert, send_alert_update
 from ..calendar import get_events
 from ..graphite import parse_metric
 from ..tasks import update_instance, update_service
+from security import safe_requests
 
 RAW_DATA_LIMIT = 5000
 
@@ -766,8 +767,7 @@ class HttpStatusCheck(StatusCheck):
                     self.password if self.password is not None else '')
 
         try:
-            resp = requests.get(
-                self.endpoint,
+            resp = safe_requests.get(self.endpoint,
                 timeout=self.timeout,
                 verify=self.verify_ssl_certificate,
                 auth=auth,

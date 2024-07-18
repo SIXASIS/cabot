@@ -1,10 +1,10 @@
 import logging
-import random
 
 from celery.task import task
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
+import secrets
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def run_all_checks():
         if check.last_run:
             next_schedule = check.last_run + timedelta(minutes=check.frequency)
         if (not check.last_run) or timezone.now() > next_schedule:
-            delay = random.choice(seconds)
+            delay = secrets.choice(seconds)
             logger.debug('Scheduling task for %s seconds from now' % delay)
             run_status_check.apply_async((check.id,), countdown=delay)
 

@@ -57,7 +57,7 @@ def _recurring_component_to_events(component):
 
 def get_calendar_data():
     feed_url = settings.CALENDAR_ICAL_URL
-    resp = requests.get(feed_url)
+    resp = requests.get(feed_url, timeout=60)
     cal = Calendar.from_ical(resp.content)
     return cal
 
